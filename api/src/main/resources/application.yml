@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/cinema
+    username: postgres
+    password: admin
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+
+jwt:
+  secret: fhsjwHWjhwqLxTgpV+nBMpM3XB0jgETR0vWsyRFV9oQ=
+  expirationMs: 43200000 # 12 hours
+  refreshExpirationMs: 86400000 # 1 day
