@@ -1,11 +1,9 @@
 package com.cgi.api.entities;
 
-import com.cgi.api.config.Constants;
 import com.cgi.api.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,7 +41,7 @@ public class User implements UserDetails {
     private String password;
 
     @JsonIgnore
-    @DateTimeFormat(pattern = Constants.DATE_FORMAT_DD_MM_YYYY)
+    @Column(nullable = false)
     private LocalDate registerDate;
 
     @JsonIgnore
