@@ -3,6 +3,8 @@ package com.cgi.api.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,24 +14,42 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Movie {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    private List<Genre> genres;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Genre> genres;
 
-    @Column(name = "min_age", nullable = false)
-    private Integer minAge;
+    @Column(name = "adult", nullable = false)
+    private Boolean adult;
+
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "duration_in_minutes", nullable = false)
     private Integer durationInMinutes;
 
-    @Column(name = "release_year", nullable = false)
-    private Integer releaseYear;
+    @Column(name = "release_date", nullable = false)
+    private LocalDate releaseDate;
+
+    @Column(name = "language", nullable = false)
+    private String language;
+
+    @Column(name = "image_src")
+    private String imageSrc;
+
+    @Column(name = "rating", columnDefinition = "DECIMAL(4,2)")
+    private BigDecimal rating;
+
+    public void setImageSrc(String imageSrc) {
+        if (imageSrc != null) {
+            this.imageSrc = "https://image.tmdb.org/t/p/original" + imageSrc;
+        }
+    }
 }

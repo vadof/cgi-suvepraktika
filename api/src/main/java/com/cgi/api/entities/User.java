@@ -50,6 +50,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @ManyToMany
+    private List<Movie> watchedMovies;
+
     @PrePersist
     private void setDate() {
         this.registerDate = LocalDate.now();

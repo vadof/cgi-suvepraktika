@@ -1,4 +1,4 @@
-package com.cgi.api.dto;
+package com.cgi.api.dto.auth;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

@@ -3,41 +3,43 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
                    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="5" author="vadim">
+    <changeSet id="21" author="vadim">
 
-        <!-- Create Movie table -->
+        <!-- Create MovieSession table -->
 
-        <createTable tableName="movie">
+        <createTable tableName="movie_session">
 
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
 
-            <column name="title" type="varchar(255)">
+            <column name="movie_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="min_age" type="int">
+            <column name="seats_available" type="int" defaultValueNumeric="100">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="duration_in_minutes" type="int">
+            <column name="start_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="release_year" type="int">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="register_date" type="date">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="role" type="varchar(255)">
+            <column name="end_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="movie_session"
+                baseColumnNames="movie_id"
+                referencedTableName="movie"
+                referencedColumnNames="id"
+                constraintName="fk_movie_session_movie"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"
+        />
 
     </changeSet>
 

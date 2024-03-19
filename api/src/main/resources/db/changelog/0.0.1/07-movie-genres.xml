@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20" author="vadim">
+
+        <!-- Create relation table between Movie and Genres -->
+
+        <createTable tableName="movie_genres">
+
+            <column name="movie_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="genres_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="movie_genres"
+                baseColumnNames="movie_id"
+                referencedTableName="movie"
+                referencedColumnNames="id"
+                constraintName="fk_movie_genres_movie"
+        />
+
+        <addForeignKeyConstraint
+                baseTableName="movie_genres"
+                baseColumnNames="genres_id"
+                referencedTableName="genre"
+                referencedColumnNames="id"
+                constraintName="fk_movie_genres_genre"
+        />
+    </changeSet>
+
+</databaseChangeLog>

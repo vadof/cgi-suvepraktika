@@ -1,6 +1,10 @@
 package com.cgi.api.services;
 
 import com.cgi.api.dto.*;
+import com.cgi.api.dto.auth.AuthenticationRequest;
+import com.cgi.api.dto.auth.AuthenticationResponse;
+import com.cgi.api.dto.auth.TokenRefreshRequest;
+import com.cgi.api.dto.auth.TokenRefreshResponse;
 import com.cgi.api.entities.RefreshToken;
 import com.cgi.api.entities.User;
 import com.cgi.api.enums.Role;
