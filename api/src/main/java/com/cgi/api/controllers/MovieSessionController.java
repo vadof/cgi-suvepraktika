@@ -2,6 +2,7 @@ package com.cgi.api.controllers;
 
 import com.cgi.api.dto.MovieSessionDto;
 import com.cgi.api.dto.SeatsInfo;
+import com.cgi.api.dto.TicketDto;
 import com.cgi.api.services.MovieSessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,7 +33,7 @@ public class MovieSessionController {
     @GetMapping("/{date}")
     public ResponseEntity<List<MovieSessionDto>> getMovieSession(
             @PathVariable(value = "date") LocalDate date) {
-        log.debug("REST request to get movie session");
+        log.debug("REST request to get movie sessions at {}", date);
         List<MovieSessionDto> dtoList = movieSessionService.getAllMovieSessionsDtoByDate(date);
         return ResponseEntity.ok().body(dtoList);
     }
@@ -58,10 +59,26 @@ public class MovieSessionController {
                     content = @Content(mediaType = "*/*"))
     })
     @GetMapping("/seats")
-    public ResponseEntity<SeatsInfo> getSeatsInfo(@RequestParam(name = "movieSession") Long movieSessionId,
+    public ResponseEntity<SeatsInfo> getSeatsInfo(@RequestParam(name = "movieSessionId") Long movieSessionId,
                                                   @RequestParam(name = "people") Integer people) {
         log.debug("REST request to get SeatsInfo for MovieSession#{} for {} people", movieSessionId, people);
         SeatsInfo seatsInfo = movieSessionService.getSeatsInfo(movieSessionId, people);
         return ResponseEntity.ok().body(seatsInfo);
+    }
+
+    @Operation(summary = "Buy Tickets to a Movie Session")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Return list with purchased Tickets",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketDto.class))),
+            @ApiResponse(responseCode = "400", description = "Incorrect Ticket data",
+                    content = @Content(mediaType = "*/*"))
+    })
+    @PostMapping("/{movieSessionId}/buy-tickets")
+    public ResponseEntity<List<TicketDto>> buyTickets(@PathVariable(name = "movieSessionId") Long movieSessionId,
+                                                  @RequestBody List<TicketDto> tickets) {
+        log.debug("REST request to buy {} Tickets for MovieSession#{}", tickets.size(), movieSessionId);
+        List<TicketDto> ticketList = movieSessionService.buyTickets(tickets, movieSessionId);
+        return ResponseEntity.ok().body(ticketList);
     }
 }

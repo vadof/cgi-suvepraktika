@@ -1,12 +1,20 @@
-package com.cgi.api.utils;
+package com.cgi.api.services;
 
 import com.cgi.api.entities.Ticket;
+import com.cgi.api.exceptions.AppException;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatRecommendation {
-    private static List<Recommendation> getRecommendedSeats(int[][] arr, int peopleAmount, int rows, int seats) {
+@Service
+@AllArgsConstructor
+@Slf4j
+public class SeatService {
+    private List<Recommendation> getRecommendedSeats(int[][] arr, int peopleAmount, int rows, int seats) {
         if (peopleAmount > seats) return new ArrayList<>();
 
         List<Recommendation> result = new ArrayList<>();
@@ -47,7 +55,7 @@ public class SeatRecommendation {
         return result;
     }
 
-    public static void markRecommendedSeats(int[][] arr, int peopleAmount, int rows, int seatsInRow, int limit) {
+    public void markRecommendedSeats(int[][] arr, int peopleAmount, int rows, int seatsInRow, int limit) {
         List<Recommendation> recomendationList = getRecommendedSeats(arr, peopleAmount, rows, seatsInRow);
         if (recomendationList.size() == 0) return;
         int bestValue = recomendationList.get(recomendationList.size() - 1).value;
@@ -65,11 +73,27 @@ public class SeatRecommendation {
         }
     }
 
-    public static void markReservedSeats(int[][] arr, List<Ticket> tickets) {
+    public void markReservedSeats(int[][] arr, List<Ticket> tickets) {
         for (Ticket ticket : tickets) {
-            arr[ticket.getRowNumber()][ticket.getSeatNumber()] = 1;
+            arr[ticket.getRowNumber() - 1][ticket.getSeatNumber() - 1] = 1;
         }
     }
+
+    public void validateTickets(int[][] seats, int rows, int seatsInRow, List<Ticket> tickets) throws AppException {
+        for (Ticket ticket : tickets) {
+            int row = ticket.getRowNumber() - 1;
+            int seat = ticket.getSeatNumber() - 1;
+
+            if (row >= rows || seat >= seatsInRow) {
+                throw new AppException("Invalid row or seat number", HttpStatus.BAD_REQUEST);
+            } else if (seats[row][seat] == 1) {
+                throw new AppException(String.format("Seat with number %s at row %s already reserved",
+                        ticket.getSeatNumber(), ticket.getRowNumber()), HttpStatus.BAD_REQUEST);
+            }
+            seats[row][seat] = 1;
+        }
+    }
+
 
     private static class Recommendation {
 

@@ -15,6 +15,9 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
 
+logging:
+  level:
+    com.cgi.api: DEBUG
 
 jwt:
   secret: fhsjwHWjhwqLxTgpV+nBMpM3XB0jgETR0vWsyRFV9oQ=
