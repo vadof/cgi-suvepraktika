@@ -37,7 +37,7 @@ public class CinemaScheduleService {
 
         for (int i = 0; i <= 7; i++) {
             LocalDate nextDay = date.plusDays(i);
-            if (movieSessionService.getAllByDate(nextDay).size() == 0) {
+            if (movieSessionService.getAllMovieSessionsByDate(nextDay).size() == 0) {
                 createScheduleForDay(movies, nextDay);
             }
         }

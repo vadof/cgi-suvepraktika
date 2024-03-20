@@ -5,4 +5,6 @@ public class Constants {
     public static final Integer CINEMA_OPEN_TIME_MINUTES = 0;
     public static final Integer CINEMA_CLOSE_TIME_HOURS = 23;
     public static final Integer CINEMA_CLOSE_TIME_MINUTES = 0;
+    public static final Integer CINEMA_ROWS = 10;
+    public static final Integer CINEMA_SEATS_IN_ROW = 10;
 }

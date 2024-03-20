@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GenreDto {
-    private Long id;
-    private String name;
+public class SeatsInfo {
+    private Integer rows;
+    private Integer seatsInRow;
+    private int[][] seats;
 }

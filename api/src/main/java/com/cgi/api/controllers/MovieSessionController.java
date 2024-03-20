@@ -1,6 +1,7 @@
 package com.cgi.api.controllers;
 
 import com.cgi.api.dto.MovieSessionDto;
+import com.cgi.api.dto.SeatsInfo;
 import com.cgi.api.services.MovieSessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,10 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +24,7 @@ public class MovieSessionController {
 
     private final MovieSessionService movieSessionService;
 
-    @Operation(summary = "Get Movie Session list at specified date (yyyy-MM-dd)")
+    @Operation(summary = "Get upcoming Movie Session list at specified date (yyyy-MM-dd)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return Movie Session list",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieSessionDto.class)))
@@ -35,7 +33,7 @@ public class MovieSessionController {
     public ResponseEntity<List<MovieSessionDto>> getMovieSession(
             @PathVariable(value = "date") LocalDate date) {
         log.debug("REST request to get movie session");
-        List<MovieSessionDto> dtoList = movieSessionService.getAllDtoByDate(date);
+        List<MovieSessionDto> dtoList = movieSessionService.getAllMovieSessionsDtoByDate(date);
         return ResponseEntity.ok().body(dtoList);
     }
 
@@ -49,5 +47,21 @@ public class MovieSessionController {
         log.debug("REST request to get upcoming movie sessions dates");
         List<LocalDate> dates = movieSessionService.getAllUpcomingMovieScheduleDates();
         return ResponseEntity.ok().body(dates);
+    }
+
+    @Operation(summary = "Get information about seats in the cinema hall")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Return 2D array (0 - seat free, 1 - seat reserved, 2 - seat recommended",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SeatsInfo.class))),
+            @ApiResponse(responseCode = "400", description = "The session has already ended | No available seats",
+                    content = @Content(mediaType = "*/*"))
+    })
+    @GetMapping("/seats")
+    public ResponseEntity<SeatsInfo> getSeatsInfo(@RequestParam(name = "movieSession") Long movieSessionId,
+                                                  @RequestParam(name = "people") Integer people) {
+        log.debug("REST request to get SeatsInfo for MovieSession#{} for {} people", movieSessionId, people);
+        SeatsInfo seatsInfo = movieSessionService.getSeatsInfo(movieSessionId, people);
+        return ResponseEntity.ok().body(seatsInfo);
     }
 }
