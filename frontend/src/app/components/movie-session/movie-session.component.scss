@@ -1,0 +1,21 @@
+.movie-session-item {
+  .card-body {
+    height: 100%;
+  }
+  font-weight: 600;
+  .card-title {
+    font-weight: 700;
+  }
+
+  .movie-session-time {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .rating {
+    span {
+      margin-right: .2rem;
+    }
+  }
+}

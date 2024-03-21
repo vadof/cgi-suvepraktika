@@ -1,0 +1,22 @@
+.schedule {
+  margin-left: .5rem;
+  margin-right: .5rem;
+  .schedule-dates {
+    color: var(--white-color);
+    background: var(--seconary-color);
+  }
+
+  .date-item {
+    cursor: pointer;
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px !important;
+  }
+
+  .selected-date {
+    background: var(--primary-color);
+    color: var(--seconary-color);
+  }
+}

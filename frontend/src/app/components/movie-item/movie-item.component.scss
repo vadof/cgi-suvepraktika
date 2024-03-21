@@ -1,5 +1,11 @@
 .movie-item {
   cursor: pointer;
+
+  img {
+    height: auto;
+    width: auto;
+  }
+
   .movie-title {
     font-weight: 600;
   }

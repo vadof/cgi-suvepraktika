@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class="container">
+
   <div class="recommendations">
     <h3 class="recommendations-header">For you</h3>
     <div class="recommendations-content row">
@@ -7,5 +8,27 @@
         <app-movie-item [movie]="movie"></app-movie-item>
       </div>
     </div>
+  </div>
+
+  <div class="schedule">
+    <div class="schedule-dates d-flex mb-3 row">
+      <div *ngFor="let date of dates"
+           class="date-item d-flex flex-column col-lg-1 col-md-2 col-6"
+           [class.selected-date] = "selectedDate === date"
+            (click)="selectDate(date)">
+        <span class="day">{{ date.getDate() }}</span>
+        <span class="month">{{ months[date.getMonth()] }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-sessions row">
+    <div *ngFor="let movieSession of movieSessions" class="movie-session-item col-lg-6 col-12">
+      <app-movie-session [movieSession]="movieSession"></app-movie-session>
+    </div>
+  </div>
+
+  <div class="movie-sessions">
+
   </div>
 </div>

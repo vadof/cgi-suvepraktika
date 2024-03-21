@@ -1,5 +1,5 @@
 <div class="movie-item card" (click)="redirect()">
-  <img class="movie-image card-img-top" [src]="movie.poster_path" alt="Movie poster">
+  <img class="movie-image card-img-top img-fluid" ngSrc="{{movie.poster_path}}" alt="Movie poster" priority width="414" height="621">
   <div class="movie-body card-body">
     <h5 class="movie-title card-title">{{ movie.title }}</h5>
     <p class="movie-genres card-text">{{ genres }}</p>

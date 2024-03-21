@@ -1,0 +1,39 @@
+<div class="movie-session-item card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img ngSrc="{{movieSession.movie.poster_path}}" alt="Movie poster" priority width="414" height="621" class="img-fluid rounded-start">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body d-flex flex-column justify-content-between">
+        <div class="top-body">
+          <div class="top-info d-flex justify-content-between">
+            <h5 class="card-title">{{ movieSession.movie.title }}</h5>
+            <div class="rating d-flex" *ngIf="movieSession.movie.vote_average">
+              <span class="fw-bold">{{ movieSession.movie.vote_average }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" height="20px" width="20px" viewBox="0 0 47.94 47.94">
+                <path style="fill:var(--primary-color);"
+                      d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757  c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042  c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685  c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528  c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956  C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+              </svg>
+            </div>
+          </div>
+          <p class="card-text movie-session-genres text-muted mb-2">{{ genres }}</p>
+          <div class="d-flex justify-content-between movie-session-time mb-1">
+            <p>{{ time }}</p>
+            <p>{{ movieSession.movie.runtime }} min</p>
+          </div>
+          <p class="card-text movie-session-language mb-2">Language: {{ movieSession.movie.original_language }}</p>
+          <p class="card-text movie-session-seats mb-2"
+             [ngClass]="movieSession.seatsAvailable >= 50 ? 'text-success' : 'text-danger'">
+            {{ movieSession.seatsAvailable }} places left
+          </p>
+        </div>
+        <div class="bottom-body">
+          <div class="movie-session-buttons d-flex justify-content-between">
+            <div class="btn-primary btn">Watch sessions</div>
+            <div class="btn-primary btn">Buy tickets</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
