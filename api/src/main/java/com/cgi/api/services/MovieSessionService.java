@@ -32,6 +32,7 @@ public class MovieSessionService extends GenericService {
     private final TicketMapper ticketMapper;
     private final TicketService ticketService;
     private final SeatService seatService;
+    private final UserService userService;
 
     @Transactional
     public MovieSession saveMovieSession(MovieSession movieSession) {
@@ -100,6 +101,7 @@ public class MovieSessionService extends GenericService {
             savedTickets.add(ticketService.saveTicket(ticket));
         }
 
+        userService.addWatchedMovie(user, movieSession.getMovie());
         movieSession.setSeatsAvailable(movieSession.getSeatsAvailable() - tickets.size());
         repository.save(movieSession);
 

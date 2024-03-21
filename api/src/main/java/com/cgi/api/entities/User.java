@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -48,8 +49,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany
-    private List<Movie> watchedMovies;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Movie> watchedMovies = new ArrayList<>();
 
     @PrePersist
     private void setDate() {
