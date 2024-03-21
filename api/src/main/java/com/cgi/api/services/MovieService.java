@@ -58,18 +58,24 @@ public class MovieService extends GenericService {
         List<Movie> watchedMovies = user.getWatchedMovies();
 
         List<Movie> moviesInSchedule = getAllMoviesInCinemaSchedule();
-        moviesInSchedule = removeAlreadyWatchedMovies(watchedMovies, moviesInSchedule);
+        Stream<Movie> sortedPreference;
 
-        Map<Movie, Integer> moviePreference = calculateMoviePreference(moviesInSchedule, getGenresRate(watchedMovies));
-
-        Stream<Movie> sortedByGenrePreference = moviesInSchedule.stream()
-                .sorted(Comparator.comparingInt(moviePreference::get).reversed());
-
-        if (limit != null) {
-            return movieMapper.toDtos(sortedByGenrePreference.limit(limit).toList());
+        if (watchedMovies.size() > 0) {
+            moviesInSchedule = removeAlreadyWatchedMovies(watchedMovies, moviesInSchedule);
+            Map<Movie, Integer> moviePreference = calculateMoviePreference(moviesInSchedule,
+                    getGenresRate(watchedMovies));
+            sortedPreference = moviesInSchedule.stream()
+                    .sorted(Comparator.comparingInt(moviePreference::get).reversed());
+        } else {
+            sortedPreference = moviesInSchedule.stream()
+                    .sorted(Comparator.comparingDouble((Movie m) -> m.getRating().doubleValue()).reversed());
         }
 
-        return movieMapper.toDtos(sortedByGenrePreference.toList());
+        if (limit != null) {
+            return movieMapper.toDtos(sortedPreference.limit(limit).toList());
+        }
+
+        return movieMapper.toDtos(sortedPreference.toList());
     }
 
     private Map<Long, Integer> getGenresRate(List<Movie> movies) {
