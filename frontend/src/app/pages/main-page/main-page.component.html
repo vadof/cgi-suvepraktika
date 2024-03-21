@@ -1,0 +1,11 @@
+<app-header></app-header>
+<div class="container">
+  <div class="recommendations">
+    <h3 class="recommendations-header">For you</h3>
+    <div class="recommendations-content row">
+      <div *ngFor="let movie of recommendations" class="col-lg-4 mb-3">
+        <app-movie-item [movie]="movie"></app-movie-item>
+      </div>
+    </div>
+  </div>
+</div>

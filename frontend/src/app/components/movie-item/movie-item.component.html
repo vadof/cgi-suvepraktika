@@ -1,0 +1,7 @@
+<div class="movie-item card" (click)="redirect()">
+  <img class="movie-image card-img-top" [src]="movie.poster_path" alt="Movie poster">
+  <div class="movie-body card-body">
+    <h5 class="movie-title card-title">{{ movie.title }}</h5>
+    <p class="movie-genres card-text">{{ genres }}</p>
+  </div>
+</div>

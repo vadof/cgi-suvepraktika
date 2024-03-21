@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+  --primary-color: #f68a1f;
+  --seconary-color: #000000;
+  --hover-color: #c56e1a;
+  --white-color: #ffffff
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--seconary-color);
+  border: none;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  transition: .5s ease;
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
+}
+
+.footer {
+  color: var(--primary-color);
+  background-color: var(--seconary-color) !important;
+  height: 5rem;
+
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
