@@ -78,8 +78,11 @@ public class TmdbAPI {
         ResponseEntity<MovieDto> response = restTemplate.exchange(url, HttpMethod.GET, entity, MovieDto.class);
 
         if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
-            // TODO CHECK MOVIE IMAGE SRC
-            return response.getBody();
+            MovieDto movie = response.getBody();
+            if (movie.getImageSrc() != null) {
+                movie.setImageSrc("https://image.tmdb.org/t/p/original" + movie.getImageSrc());
+            }
+            return movie;
         } else {
             throw new AppException("Error getting Movie#" + id + " from TMDB", HttpStatus.INTERNAL_SERVER_ERROR);
         }

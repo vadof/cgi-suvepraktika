@@ -45,10 +45,4 @@ public class Movie {
 
     @Column(name = "rating", columnDefinition = "DECIMAL(4,2)")
     private BigDecimal rating;
-
-    public void setImageSrc(String imageSrc) {
-        if (imageSrc != null) {
-            this.imageSrc = "https://image.tmdb.org/t/p/original" + imageSrc;
-        }
-    }
 }

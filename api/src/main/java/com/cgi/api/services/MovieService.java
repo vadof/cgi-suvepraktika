@@ -42,9 +42,6 @@ public class MovieService extends GenericService {
         Optional<Movie> optionalMovie = movieRepository.findById(movieDto.getId());
         if (optionalMovie.isEmpty()) {
             Movie movie = movieMapper.toEntity(movieDto);
-            if (movie.getImageSrc() != null) {
-                movie.setImageSrc("https://image.tmdb.org/t/p/original" + movie.getImageSrc());
-            }
             movieRepository.save(movie);
             log.info("New Movie saved to database {}", movie);
             return movie;
