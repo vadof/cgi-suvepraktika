@@ -16,6 +16,7 @@
               </svg>
             </div>
           </div>
+          <p *ngIf="movieSession.movie.adult" class="card-text fw-bold mb-1">Age: <span class="text-danger">18+</span></p>
           <p class="card-text movie-session-genres text-muted mb-2">{{ genres }}</p>
           <div class="d-flex justify-content-between movie-session-time mb-1">
             <p>{{ time }}</p>
@@ -29,7 +30,7 @@
         </div>
         <div class="bottom-body">
           <div class="movie-session-buttons d-flex justify-content-between">
-            <div class="btn-primary btn">Watch sessions</div>
+            <div class="btn-primary btn" routerLink="movies/{{ movieSession.movie.id }}">Watch sessions</div>
             <div class="btn-primary btn">Buy tickets</div>
           </div>
         </div>

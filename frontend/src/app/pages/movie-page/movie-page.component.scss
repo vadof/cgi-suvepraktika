@@ -1,0 +1,41 @@
+.movie {
+
+  font-size: 1.5rem;
+
+  .movie-info {
+    width: 100% !important;
+    margin-left: 1rem;
+
+    .movie-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+
+      .rating span {
+        margin-right: .5rem;
+      }
+
+      svg {
+        margin-top: .4rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .movie {
+
+    font-size: 1rem;
+
+    .movie-info {
+
+      .movie-title {
+        font-size: 2rem;
+        font-weight: 700;
+
+        svg {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

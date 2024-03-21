@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IMovie} from "../../models/IMovie";
 import {Router} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
-import {genresToString} from "../../utrils/utils";
+import {genresToString} from "../../utils/utils";
 
 @Component({
   selector: 'app-movie-item',

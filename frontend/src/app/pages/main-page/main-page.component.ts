@@ -53,7 +53,6 @@ export class MainPageComponent implements OnInit {
     this.selectedDate = date;
     this.http.sendGetRequest(`/api/v1/movie-sessions/${this.dateToStr(date)}`).subscribe(res => {
       this.movieSessions = res as IMovieSession[];
-      console.log(this.movieSessions);
     })
   }
 

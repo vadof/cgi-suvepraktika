@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IMovieSession} from "../../models/IMovieSession";
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
-import {dateToHHMM, genresToString} from "../../utrils/utils";
-import {Router} from "@angular/router";
+import {dateToHHMM, genresToString} from "../../utils/utils";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-movie-session',
@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
   imports: [
     NgOptimizedImage,
     NgIf,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './movie-session.component.html',
   styleUrl: './movie-session.component.scss'
@@ -19,9 +20,6 @@ export class MovieSessionComponent implements OnInit {
   @Input() movieSession!: IMovieSession;
   time: string = '';
   genres: string = '';
-
-  constructor(private router: Router) {
-  }
 
   ngOnInit(): void {
     let description = this.movieSession.movie.overview;

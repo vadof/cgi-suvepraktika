@@ -1,0 +1,26 @@
+<div class="item">
+  <div class="card">
+    <div class="card-body">
+
+      <div class="d-flex justify-content-between mb-2">
+        <div class="movie-time">{{ time }}</div>
+        <div class="btn-primary btn">Buy tickets</div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="date">
+          Date: {{ date }}
+        </div>
+        <div class="language">
+          Language: {{ movieSession.movie.original_language }}
+        </div>
+        <div class="seats"
+             [ngClass]="movieSession.seatsAvailable >= 50 ? 'text-success' : 'text-danger'">
+          {{ movieSession.seatsAvailable }} places left
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
