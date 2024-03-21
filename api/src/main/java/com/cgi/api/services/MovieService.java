@@ -4,12 +4,14 @@ import com.cgi.api.dto.MovieDto;
 import com.cgi.api.entities.Genre;
 import com.cgi.api.entities.Movie;
 import com.cgi.api.entities.User;
+import com.cgi.api.exceptions.AppException;
 import com.cgi.api.mappers.MovieMapper;
 import com.cgi.api.repostirories.MovieRepository;
 import com.cgi.api.repostirories.MovieSessionRepository;
 import com.cgi.api.services.common.GenericService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -112,5 +114,14 @@ public class MovieService extends GenericService {
         return movies.stream()
                 .filter(movie -> !watchedIds.contains(movie.getId()))
                 .toList();
+    }
+
+    public MovieDto getMovieById(Long id) {
+        return movieMapper.toDto(getMovie(id));
+    }
+
+    private Movie getMovie(Long id) {
+        return movieRepository.findById(id).orElseThrow(
+                () -> new AppException("Movie#" + id + " not found", HttpStatus.NOT_FOUND));
     }
 }

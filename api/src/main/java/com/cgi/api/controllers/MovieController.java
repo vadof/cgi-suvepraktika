@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,20 @@ public class MovieController {
         log.debug("REST request to get Movie Recommendation");
         List<MovieDto> movies = movieService.getMovieRecommendation(limit);
         return ResponseEntity.ok().body(movies);
+    }
+
+    @Operation(summary = "Find Movie by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Movie found", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = MovieDto.class))),
+            @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content(mediaType = "*/*"))
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> getMovie(@PathVariable(name = "id") Long id) {
+        log.debug("REST request to get Movie#{}", id);
+        MovieDto movie = movieService.getMovieById(id);
+        return ResponseEntity.ok().body(movie);
     }
 
 }
