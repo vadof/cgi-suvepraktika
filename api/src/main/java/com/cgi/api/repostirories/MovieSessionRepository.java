@@ -17,4 +17,7 @@ public interface MovieSessionRepository extends JpaRepository<MovieSession, Long
 
     @Query("SELECT DISTINCT ms.movie FROM MovieSession ms WHERE ms.endDate > :date")
     List<Movie> findAllUniqueMovies(@Param("date") LocalDateTime afterDate);
+
+    @Query("FROM MovieSession ms WHERE ms.movie.id = :id AND ms.endDate > :date")
+    List<MovieSession> findAllByMovieAndDate(@Param("id") Long movieId, @Param("date") LocalDateTime afterDate);
 }

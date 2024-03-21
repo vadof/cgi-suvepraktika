@@ -30,7 +30,8 @@ public class MovieSessionController {
     @Operation(summary = "Get upcoming Movie Session list at specified date (yyyy-MM-dd)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return Movie Session list",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieSessionDto.class)))
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MovieSessionDto.class)))
     })
     @GetMapping("/{date}")
     public ResponseEntity<List<MovieSessionDto>> getMovieSession(
@@ -43,7 +44,8 @@ public class MovieSessionController {
     @Operation(summary = "Get all upcoming dates that already have movie schedules")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return LocalDate list",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = LocalDate.class)))
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = LocalDate.class)))
     })
     @GetMapping("/dates")
     public ResponseEntity<List<LocalDate>> getMovieSession() {
@@ -56,7 +58,8 @@ public class MovieSessionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Return 2D array (0 - seat free, 1 - seat reserved, 2 - seat recommended",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SeatsInfo.class))),
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SeatsInfo.class))),
             @ApiResponse(responseCode = "400", description = "The session has already ended | No available seats",
                     content = @Content(mediaType = "*/*"))
     })
@@ -72,7 +75,8 @@ public class MovieSessionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Return list with purchased Tickets",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketDto.class))),
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TicketDto.class))),
             @ApiResponse(responseCode = "400", description = "Incorrect Ticket data",
                     content = @Content(mediaType = "*/*"))
     })
@@ -82,5 +86,19 @@ public class MovieSessionController {
         log.debug("REST request to buy {} Tickets for MovieSession#{}", tickets.size(), movieSessionId);
         List<TicketDto> ticketList = movieSessionService.buyTickets(tickets, movieSessionId);
         return ResponseEntity.ok().body(ticketList);
+    }
+
+    @Operation(summary = "Get all Movie Sessions by Movie id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Return list with Movie Sessions",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MovieSessionDto.class))),
+    })
+    @GetMapping("/movie/{movieId}")
+    public ResponseEntity<List<MovieSessionDto>> getAllMovieSessionsByMovie(@PathVariable(name = "movieId") Long movieId) {
+        log.debug("REST request to get all Movie Sessions with Movie#{}", movieId);
+        List<MovieSessionDto> movies = movieSessionService.getAllMovieSessionsByMovie(movieId);
+        return ResponseEntity.ok().body(movies);
     }
 }

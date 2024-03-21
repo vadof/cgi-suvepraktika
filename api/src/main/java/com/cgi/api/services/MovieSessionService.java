@@ -128,4 +128,8 @@ public class MovieSessionService extends GenericService {
     private boolean movieSessionEnded(MovieSession movieSession) {
         return LocalDateTime.now().isAfter(movieSession.getEndDate());
     }
+
+    public List<MovieSessionDto> getAllMovieSessionsByMovie(Long movieId) {
+        return movieSessionMapper.toDtos(repository.findAllByMovieAndDate(movieId, LocalDateTime.now()));
+    }
 }
