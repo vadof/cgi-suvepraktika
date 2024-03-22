@@ -14,6 +14,8 @@ Run `docker compose up -d` in the root directory (`cgi-suvepraktika$`), which la
 ## Server side
 
 When the application is started, movies are added to the database, which are obtained from [themoviedb.org](https://www.themoviedb.org/) using the API. (If this does not happen, please contact me, there may be an issue with the API key). After obtaining all the movies, a schedule of movie sessions for the next 7 days is created. The schedule is updated daily.
+## API
+If the server part is running, the API documentation can be viewed at this address [OpenAPI](http://localhost:8080/swagger-ui/index.html#/).
 
 ## Client Side
 On the client side, users need to register an account.
