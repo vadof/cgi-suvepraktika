@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -44,6 +45,7 @@ public class MovieSessionService extends GenericService {
         LocalDateTime now = LocalDateTime.now();
         return repository.findAllByDate(date).stream()
                 .filter((movieSession -> movieSession.getEndDate().isAfter(now)))
+                .sorted(Comparator.comparing(MovieSession::getStartDate))
                 .toList();
     }
 
@@ -83,6 +85,10 @@ public class MovieSessionService extends GenericService {
 
     @Transactional
     public List<TicketDto> buyTickets(List<TicketDto> ticketsDto, Long movieSessionId) {
+        if (ticketsDto.size() == 0) {
+            throw new AppException("Tickets size must be greater than 0", HttpStatus.BAD_REQUEST);
+        }
+
         MovieSession movieSession = getMovieSession(movieSessionId);
 
         if (movieSessionEnded(movieSession)) {

@@ -10,9 +10,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -22,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/movie-sessions")
 @AllArgsConstructor
+@Validated
 @Slf4j
 public class MovieSessionController {
 
@@ -82,7 +85,7 @@ public class MovieSessionController {
     })
     @PostMapping("/{movieSessionId}/buy-tickets")
     public ResponseEntity<List<TicketDto>> buyTickets(@PathVariable(name = "movieSessionId") Long movieSessionId,
-                                                  @RequestBody List<TicketDto> tickets) {
+                                                  @RequestBody @Valid List<TicketDto> tickets) {
         log.debug("REST request to buy {} Tickets for MovieSession#{}", tickets.size(), movieSessionId);
         List<TicketDto> ticketList = movieSessionService.buyTickets(tickets, movieSessionId);
         return ResponseEntity.ok().body(ticketList);

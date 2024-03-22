@@ -26,7 +26,4 @@ public class TicketDto {
     @NotNull
     @Positive
     private Integer seatNumber;
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private UserDto user;
 }
