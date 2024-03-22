@@ -2,11 +2,17 @@
   cursor: pointer;
 
   img {
-    height: auto;
+    height: 621px;
     width: auto;
   }
 
   .movie-title {
     font-weight: 600;
+  }
+
+  @media (max-width: 1400px) {
+    .movie-item img {
+      height: auto;
+    }
   }
 }

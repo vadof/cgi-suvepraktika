@@ -27,11 +27,11 @@
   </div>
 
   <div class="seats mt-5 mb-3" *ngIf="showSeats">
-    <div class="d-flex guide-color mb-4">
-      <div class="color d-flex"><span class="available"></span>Available</div>
-      <div class="color d-flex"><span class="reserved"></span>Reserved</div>
-      <div class="color d-flex"><span class="recommended"></span>Recommended</div>
-      <div class="color d-flex"><span class="selected"></span>Selected</div>
+    <div class="d-flex guide-color mb-4 row">
+      <div class="color d-flex col-12 col-sm-3"><span class="available"></span>Available</div>
+      <div class="color d-flex col-12 col-sm-3"><span class="reserved"></span>Reserved</div>
+      <div class="color d-flex col-12 col-sm-3"><span class="recommended"></span>Recommended</div>
+      <div class="color d-flex col-12 col-sm-3"><span class="selected"></span>Selected</div>
     </div>
     <div *ngFor="let row of seats; let rowIdx = index" class="d-flex seat-row mb-2 align-items-center">
       <div *ngFor="let seat of row; let seatIdx = index" class="seat" (click)="chooseSeat(rowIdx, seatIdx)"
