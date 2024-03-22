@@ -33,7 +33,7 @@ public class MovieSessionController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = MovieSessionDto.class)))
     })
-    @GetMapping("/{date}")
+    @GetMapping("/dates/{date}")
     public ResponseEntity<List<MovieSessionDto>> getMovieSession(
             @PathVariable(value = "date") LocalDate date) {
         log.debug("REST request to get movie sessions at {}", date);
@@ -100,5 +100,21 @@ public class MovieSessionController {
         log.debug("REST request to get all Movie Sessions with Movie#{}", movieId);
         List<MovieSessionDto> movies = movieSessionService.getAllMovieSessionsByMovie(movieId);
         return ResponseEntity.ok().body(movies);
+    }
+
+    @Operation(summary = "Get all Movie Sessions by Movie id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Return list with Movie Sessions",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MovieSessionDto.class))),
+            @ApiResponse(responseCode = "404", description = "Movie Session not found",
+                    content = @Content(mediaType = "*/*"))
+    })
+    @GetMapping("/{movieSessionId}")
+    public ResponseEntity<MovieSessionDto> getMovieSessionById(@PathVariable(name = "movieSessionId") Long movieSessionId) {
+        log.debug("REST request to get all MovieSession#{}", movieSessionId);
+        MovieSessionDto movieSession = movieSessionService.getMovieSessionById(movieSessionId);
+        return ResponseEntity.ok().body(movieSession);
     }
 }

@@ -132,4 +132,8 @@ public class MovieSessionService extends GenericService {
     public List<MovieSessionDto> getAllMovieSessionsByMovie(Long movieId) {
         return movieSessionMapper.toDtos(repository.findAllByMovieAndDate(movieId, LocalDateTime.now()));
     }
+
+    public MovieSessionDto getMovieSessionById(Long movieSessionId) {
+        return movieSessionMapper.toDto(getMovieSession(movieSessionId));
+    }
 }
