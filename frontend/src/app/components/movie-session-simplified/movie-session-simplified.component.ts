@@ -2,12 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IMovieSession} from "../../models/IMovieSession";
 import {dateToDDMMYYYY, dateToHHMM} from "../../utils/utils";
 import {NgClass} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-movie-session-simplified',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './movie-session-simplified.component.html',
   styleUrl: './movie-session-simplified.component.scss'

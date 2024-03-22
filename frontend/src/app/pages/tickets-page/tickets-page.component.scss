@@ -1,0 +1,100 @@
+.tickets-info {
+  font-weight: 500;
+  font-size: 2rem;
+
+  .movie-title {
+    font-weight: 700;
+  }
+
+  .ticket-amount {
+    margin: 0 1rem;
+  }
+
+  .btn {
+    font-weight: 700;
+  }
+}
+
+.seats {
+
+  .guide-color {
+
+    .color {
+      span {
+        width: 20px;
+        margin-right: 5px;
+        height: 20px;
+        border-radius: 4px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .row-index {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .seat {
+    padding: 20px;
+
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .available {
+    background-color: beige;
+  }
+
+  .recommended {
+    background-color: yellow;
+  }
+
+  .reserved {
+    background-color: red;
+    cursor: auto;
+  }
+
+  .selected {
+    background-color: lightgreen;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tickets-info {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tickets-info {
+    .movie-session-info {
+      flex-direction: column;
+    }
+
+    .ticket-title {
+      text-align: start !important;
+    }
+
+    .ticket-options {
+      flex-direction: column;
+    }
+
+    .choose-seats-btn {
+      justify-content: start !important;
+    }
+
+  }
+}
+
+

@@ -51,7 +51,7 @@ export class MainPageComponent implements OnInit {
 
   selectDate(date: Date) {
     this.selectedDate = date;
-    this.http.sendGetRequest(`/api/v1/movie-sessions/${this.dateToStr(date)}`).subscribe(res => {
+    this.http.sendGetRequest(`/api/v1/movie-sessions/dates/${this.dateToStr(date)}`).subscribe(res => {
       this.movieSessions = res as IMovieSession[];
     })
   }

@@ -35,7 +35,7 @@ export class MoviePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(async params => {
+    this.route.paramMap.subscribe(params => {
       const id = +params.get('id')!;
       this.http.sendGetRequest(`/api/v1/movies/${id}`).subscribe(res => {
 

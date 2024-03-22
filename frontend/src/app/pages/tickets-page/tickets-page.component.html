@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="movie-tickets container d-flex align-items-center flex-column">
+  <div class="tickets-info w-50">
+    <div class="movie-session-info mb-3">
+      <div class="movie-session-info d-flex justify-content-between">
+        <div class="movie-title">{{ movieSession.movie.title }}</div>
+        <div class="movie-session-time">{{ time }}</div>
+      </div>
+      <div class="movie-session-date">{{ date }}</div>
+    </div>
+
+    <div class="tickets">
+      <div class="ticket-title text-center mb-2 fw-bold">Select tickets</div>
+      <div class="ticket-options d-flex justify-content-between mb-4">
+        <div class="ticket-option-name">Standard ticket</div>
+        <div class="ticket-amount-section">
+          <div class="btn-primary btn" [class.disabled] = "ticketAmount === 0" (click)="addTickets(-1)">-</div>
+          <span class="ticket-amount fw-bold">{{ ticketAmount }}</span>
+          <div class="btn-primary btn" [class.disabled] = "ticketAmount === movieSession.seatsAvailable" (click)="addTickets(1)">+</div>
+        </div>
+      </div>
+      <div class="choose-seats-btn d-flex justify-content-end">
+        <div class="btn-primary btn" (click)="getSeats()">Choose seats</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seats mt-5 mb-3" *ngIf="showSeats">
+    <div class="d-flex guide-color mb-4">
+      <div class="color d-flex"><span class="available"></span>Available</div>
+      <div class="color d-flex"><span class="reserved"></span>Reserved</div>
+      <div class="color d-flex"><span class="recommended"></span>Recommended</div>
+      <div class="color d-flex"><span class="selected"></span>Selected</div>
+    </div>
+    <div *ngFor="let row of seats; let rowIdx = index" class="d-flex seat-row mb-2 align-items-center">
+      <div *ngFor="let seat of row; let seatIdx = index" class="seat" (click)="chooseSeat(rowIdx, seatIdx)"
+           [ngClass]="{'available': seat === 0, 'reserved' : seat === 1, 'recommended': seat === 2, 'selected': seat === 3}">
+        {{ seatIdx + 1 }}
+      </div>
+      <div class="row-index">{{ rowIdx + 1 }}</div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedSeats.size === ticketAmount && showSeats" class="text-start mb-3">
+    <div class="btn-primary btn" (click)="confirm()">Confirm</div>
+  </div>
+
+  <div *ngIf="errorMessage" class="text-danger fw-bold mb-3">{{ errorMessage }}</div>
+</div>
