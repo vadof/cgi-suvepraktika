@@ -3,40 +3,50 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
                    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="21" author="vadim">
+    <changeSet id="8" author="vadim">
 
-        <!-- Create MovieSession table -->
+        <!-- Create Ticket table -->
 
-        <createTable tableName="movie_session">
+        <createTable tableName="ticket">
 
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
 
-            <column name="movie_id" type="bigint">
+            <column name="movie_session_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="seats_available" type="int" defaultValueNumeric="100">
+            <column name="seat_number" type="int">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="start_date" type="timestamp">
+            <column name="row_number" type="int">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="end_date" type="timestamp">
+            <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
 
         <addForeignKeyConstraint
-                baseTableName="movie_session"
-                baseColumnNames="movie_id"
-                referencedTableName="movie"
+                baseTableName="ticket"
+                baseColumnNames="movie_session_id"
+                referencedTableName="movie_session"
                 referencedColumnNames="id"
-                constraintName="fk_movie_session_movie"
+                constraintName="fk_ticket_movie_session"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"
+        />
+
+        <addForeignKeyConstraint
+                baseTableName="ticket"
+                baseColumnNames="user_id"
+                referencedTableName="my_user"
+                referencedColumnNames="id"
+                constraintName="fk_ticket_user"
                 onDelete="CASCADE"
                 onUpdate="CASCADE"
         />

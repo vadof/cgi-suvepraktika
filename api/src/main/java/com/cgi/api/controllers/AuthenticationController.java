@@ -1,11 +1,11 @@
 package com.cgi.api.controllers;
 
-import com.cgi.api.dto.*;
 import com.cgi.api.dto.auth.AuthenticationRequest;
 import com.cgi.api.dto.auth.AuthenticationResponse;
 import com.cgi.api.dto.auth.TokenRefreshRequest;
 import com.cgi.api.dto.auth.TokenRefreshResponse;
-import com.cgi.api.services.AuthenticationService;
+import com.cgi.api.dto.common.UserDto;
+import com.cgi.api.services.auth.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

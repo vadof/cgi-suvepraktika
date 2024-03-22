@@ -6,7 +6,6 @@ import com.cgi.api.repostirories.GenreRepository;
 import com.cgi.api.repostirories.MovieSessionRepository;
 import com.cgi.api.services.CinemaScheduleService;
 import com.cgi.api.utils.TmdbAPI;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +25,7 @@ public class DatabaseInitializer {
     private final MovieSessionRepository movieSessionRepository;
 
     @Bean
-    public void addGenresToDatabase() throws JsonProcessingException {
+    public void addGenresToDatabase() {
         if (genreRepository.findAll().size() == 0) {
             List<Genre> allGenres = tmdbAPI.getAllGenres();
             genreRepository.saveAll(allGenres);

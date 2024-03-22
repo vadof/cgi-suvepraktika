@@ -1,4 +1,4 @@
-package com.cgi.api.dto;
+package com.cgi.api.dto.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

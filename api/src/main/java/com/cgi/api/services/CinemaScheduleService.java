@@ -24,8 +24,6 @@ public class CinemaScheduleService {
     private final TmdbAPI tmdbAPI;
     private final MovieSessionService movieSessionService;
 
-
-    // TODO test function
     @Scheduled(cron = "0 0 0 * * *")
     public void updateMovieSessionSchedule() {
         createMovieSessionSchedule();

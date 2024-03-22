@@ -1,6 +1,6 @@
 package com.cgi.api.services;
 
-import com.cgi.api.dto.PaginatedResponse;
+import com.cgi.api.dto.common.PaginatedResponse;
 import com.cgi.api.dto.TicketDto;
 import com.cgi.api.dto.search.TicketSearchDto;
 import com.cgi.api.entities.Ticket;

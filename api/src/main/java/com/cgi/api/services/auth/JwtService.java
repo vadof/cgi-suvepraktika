@@ -1,4 +1,4 @@
-package com.cgi.api.services;
+package com.cgi.api.services.auth;
 
 import com.cgi.api.entities.User;
 import com.cgi.api.repostirories.UserRepository;

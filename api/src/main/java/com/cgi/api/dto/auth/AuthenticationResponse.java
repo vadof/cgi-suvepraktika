@@ -1,6 +1,6 @@
 package com.cgi.api.dto.auth;
 
-import com.cgi.api.dto.UserDto;
+import com.cgi.api.dto.common.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

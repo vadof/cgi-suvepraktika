@@ -1,6 +1,6 @@
 package com.cgi.api.mappers;
 
-import com.cgi.api.dto.UserDto;
+import com.cgi.api.dto.common.UserDto;
 import com.cgi.api.entities.User;
 import com.cgi.api.mappers.common.EntityMapper;
 import org.mapstruct.Mapper;
