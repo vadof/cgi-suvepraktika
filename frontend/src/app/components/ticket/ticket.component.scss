@@ -1,0 +1,11 @@
+.item {
+  cursor: pointer;
+  .card {
+    font-weight: 600;
+
+    .movie-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+}

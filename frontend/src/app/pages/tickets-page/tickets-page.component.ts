@@ -62,14 +62,16 @@ export class TicketsPageComponent implements OnInit {
   }
 
   getSeats() {
-    let url = `/api/v1/movie-sessions/seats?movieSessionId=${this.movieSession.id}&people=${this.ticketAmount}`;
-    this.http.sendGetRequest(url).subscribe(res => {
-      this.seats = res.seats;
-      this.selectedSeats.clear();
-      this.showSeats = true;
-    }, err => {
-      console.log(err)
-    })
+    if (this.ticketAmount > 0) {
+      let url = `/api/v1/movie-sessions/seats?movieSessionId=${this.movieSession.id}&people=${this.ticketAmount}`;
+      this.http.sendGetRequest(url).subscribe(res => {
+        this.seats = res.seats;
+        this.selectedSeats.clear();
+        this.showSeats = true;
+      }, err => {
+        console.log(err)
+      })
+    }
   }
 
   chooseSeat(row: number, seat: number) {

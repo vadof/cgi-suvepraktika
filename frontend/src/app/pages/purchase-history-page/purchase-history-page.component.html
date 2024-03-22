@@ -1,1 +1,20 @@
-<p>purchase-history-page works!</p>
+<app-header></app-header>
+<div class="container">
+  <h1 class="title text-center fw-bold" *ngIf="tickets.length === 0">No tickets found</h1>
+  <h1 class="title text-center fw-bold" *ngIf="tickets.length > 0">Tickets</h1>
+  <div *ngFor="let ticket of tickets" class="mb-2">
+    <app-ticket [ticket]="ticket"></app-ticket>
+  </div>
+
+  <ul *ngIf="totalPages > 1" class="pagination">
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 0}">
+      <a class="page-link" (click)="selectPage(currentPage - 1)">Previous</a>
+    </li>
+    <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
+      <a class="page-link" (click)="selectPage(page)">{{ page + 1 }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="selectPage(currentPage + 1)" [ngClass]="{'disabled': currentPage === totalPages - 1}">Next</a>
+    </li>
+  </ul>
+</div>

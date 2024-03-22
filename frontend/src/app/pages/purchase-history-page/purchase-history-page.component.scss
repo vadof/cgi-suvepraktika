@@ -1,0 +1,17 @@
+.pagination {
+  margin-top: 1rem;
+  justify-content: center;
+
+  .page-link {
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+
+  .active {
+    a {
+      color: var(--seconary-color) !important;
+      background-color: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+    }
+  }
+}
