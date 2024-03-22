@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16rc1
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=cinema
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - cinema-project
+  backend:
+    build: ./api
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres
+    networks:
+      - cinema-project
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - '4200:4200'
+    networks:
+      - cinema-project
+
+networks:
+  cinema-project:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local
