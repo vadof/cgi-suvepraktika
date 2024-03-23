@@ -17,7 +17,8 @@ When the application is started, movies are added to the database, which are obt
 ## API
 If the server part is running, the API documentation can be viewed at this address [OpenAPI](http://localhost:8080/swagger-ui/index.html#/).
 
-## Client Side
+## Client Side 
+[URL](http://localhost:4200/)
 On the client side, users need to register an account.
 ## Recommendations
 Upon landing on the homepage, users are shown recommendations based on their genre preferences. If the user has no viewing history, movies are recommended based on their ratings.
