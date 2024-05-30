@@ -136,7 +136,9 @@ public class MovieSessionService extends GenericService {
     }
 
     public List<MovieSessionDto> getAllMovieSessionsByMovie(Long movieId) {
-        return movieSessionMapper.toDtos(repository.findAllByMovieAndDate(movieId, LocalDateTime.now()));
+        List<MovieSession> movieSessions = repository.findAllByMovieAndDate(movieId, LocalDateTime.now());
+        movieSessions.sort(Comparator.comparing(MovieSession::getStartDate));
+        return movieSessionMapper.toDtos(movieSessions);
     }
 
     public MovieSessionDto getMovieSessionById(Long movieSessionId) {
