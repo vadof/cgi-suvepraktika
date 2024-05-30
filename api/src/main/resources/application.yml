@@ -21,7 +21,7 @@ logging:
 
 jwt:
   secret: fhsjwHWjhwqLxTgpV+nBMpM3XB0jgETR0vWsyRFV9oQ=
-  expirationMs: 43200000 # 12 hours
+  expirationMs: 900000 # 15 min
   refreshExpirationMs: 86400000 # 1 day
 
 tmdb:

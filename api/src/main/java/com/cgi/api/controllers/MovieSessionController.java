@@ -60,7 +60,7 @@ public class MovieSessionController {
     @Operation(summary = "Get information about seats in the cinema hall")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Return 2D array (0 - seat free, 1 - seat reserved, 2 - seat recommended",
+                    description = "Return 2D array (0 - seat free, 1 - seat reserved, 2 - seat recommended)",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = SeatsInfo.class))),
             @ApiResponse(responseCode = "400", description = "The session has already ended | No available seats",

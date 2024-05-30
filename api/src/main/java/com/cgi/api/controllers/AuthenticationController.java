@@ -63,7 +63,7 @@ public class AuthenticationController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = TokenRefreshResponse.class))),
             @ApiResponse(responseCode = "401", description = "Refresh token was expired", content = @Content(mediaType = "*/*"))
     })
-    @PostMapping("/refresh_token")
+    @PostMapping("/refresh-token")
     public ResponseEntity<TokenRefreshResponse> refreshToken(@RequestBody @Valid TokenRefreshRequest request) {
         log.info("REST request to refresh token {}", request.getRefreshToken());
         TokenRefreshResponse response = authenticationService.refreshToken(request);
